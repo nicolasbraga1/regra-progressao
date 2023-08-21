@@ -51,6 +51,13 @@ public class App {
       media += ((double) notas[i] * atividadePeso[i]) / 100;
     }
 
-    System.out.printf("A média ponderada do estudante é: %.2f%%\n", media);
+    if (media >= 85) {
+      System.out.println("Parabéns! Você alcançou " + media
+          + "%! E temos o prazer de informar que você obteve aprovação!");
+    } else if (media < 85) {
+      System.out.println(
+          "Lamentamos informar que, com base na sua pontuação alcançada neste período, " + media
+              + "%, você não atingiu a pontuação mínima necessária para sua aprovação.");
+    }
   }
 }
