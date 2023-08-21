@@ -1,8 +1,10 @@
 package com.trybe.java.regraprogressao;
+
 import java.util.Scanner;
 /**
  * App.
  */
+
 public class App {
 
   /**
@@ -16,18 +18,39 @@ public class App {
 
     String[] atividadeNome = new String[quantidadeAtividades];
     int[] atividadePeso = new int[quantidadeAtividades];
+    int[] notas = new int[quantidadeAtividades];
     int pesoTotal = 0;
     for (int i = 0; i < quantidadeAtividades; i++) {
-      System.out.println("Digite o nome da atividade " + (i + 1) + ":");
+      System.out.printf("Digite o nome da atividade %d:\n", i + 1);
       atividadeNome[i] = sc.nextLine();
-      System.out.println("Digite o peso da atividade " + (i + 1) + ":");
+      System.out.printf("Digite o peso da atividade %d:\n", i + 1);
       atividadePeso[i] = sc.nextInt();
+      while (atividadePeso[i] < 1 || atividadePeso[i] > 100) {
+        System.out.println("Erro: Peso inválido! O peso deve ser entre 1 e 100.");
+        System.out.printf("Digite novamente o peso da atividade %d:\n", i + 1);
+        atividadePeso[i] = sc.nextInt();
+      }
       sc.nextLine();
 
       pesoTotal += atividadePeso[i];
+
+      System.out.printf("Digite a nota obtida para %s:\n", atividadeNome[i]);
+      notas[i] = sc.nextInt();
+      while (notas[i] < 0 || notas[i] > 100) {
+        System.out.println("Erro: Nota inválida! A nota deve ser entre 0 e 100.");
+        System.out.printf("Digite novamente a nota obtida para %s:\n", atividadeNome[i]);
+        notas[i] = sc.nextInt();
+      }
+      sc.nextLine();
     }
     if (pesoTotal != 100) {
       System.out.println("Erro: A soma dos pesos não é igual a 100.");
     }
+    double media = 0;
+    for (int i = 0; i < quantidadeAtividades; i++) {
+      media += ((double) notas[i] * atividadePeso[i]) / 100;
+    }
+
+    System.out.printf("A média ponderada do estudante é: %.2f%%\n", media);
   }
 }
